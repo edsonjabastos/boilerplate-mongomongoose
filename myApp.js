@@ -1,19 +1,30 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const Schema = mongoose.Schema;
 
 mongoose.connect(process.env.MONGO_URI);
 
 const personSchema = new Schema({
-  personId: Number,
-  personName: String,
-  personAge: Number,
+  name: { type: String, required: true },
+  age: Number,
   favoriteFoods: [String],
 });
 
-let Person;
+const Person = mongoose.model("Person", personSchema);
 
-Person = mongoose.model("Person", personSchema);
+// const M = mongoose.model("Person", personSchema);
+// const m = new M({ name: null });
+// const m0 = new M({ name: "Gotem" });
+
+// m.validate(async function (err) {
+//   if (m.name !== null || "") {
+//     console.log(m0);
+//     await m0.save();
+//     console.log(m);
+//     await m.save();
+//   }
+//   console.log(err); // Will tell you that null is not allowed.
+// });
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
