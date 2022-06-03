@@ -12,24 +12,17 @@ const personSchema = new Schema({
 
 const Person = mongoose.model("Person", personSchema);
 
-// const M = mongoose.model("Person", personSchema);
-// const m = new M({ name: null });
-// const m0 = new M({ name: "Gotem" });
-
-// m.validate(async function (err) {
-//   if (m.name !== null || "") {
-//     console.log(m0);
-//     await m0.save();
-//     console.log(m);
-//     await m.save();
-//   }
-//   console.log(err); // Will tell you that null is not allowed.
-// });
-
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  var querido = new Person({
+    name: "querido",
+    age: 1,
+    favoriteFoods: ["whiskas", "sushi"],
+  });
+  querido.save(function (err, data) {
+    if (err) return console.error(err);
+    done(null, data);
+  });
 };
-
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
 };
@@ -80,7 +73,6 @@ const queryChain = (done) => {
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
-exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
 exports.findPeopleByName = findPeopleByName;
 exports.findOneByFood = findOneByFood;
